@@ -12,3 +12,16 @@
 .textcol{
   color: black;
 }
+/* Font styles */
+.roboto{
+  font-family: "Roboto", sans-serif;
+  
+}
+.iceland{
+  font-family: "Iceland", sans-serif;
+
+}
+.poppin{
+  font-family: "Poppins", sans-serif;
+
+}
