@@ -1,0 +1,14 @@
+@import "tailwindcss";
+/* DaisyUI plugin should be added in the Tailwind CSS configuration file, not in the CSS file */
+
+
+/* This is the theme for the Landing page */
+.bgland{
+  background-color: #fdfbfb ;
+}
+.bgbutton{
+  background-color: #1d3b53;
+}
+.textcol{
+  color: black;
+}
