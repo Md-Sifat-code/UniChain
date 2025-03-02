@@ -13,6 +13,9 @@ import SignUp from "./Authentication/Auth_component/SignUp";
 import Varification from "./Authentication/Auth_component/Varification";
 import Main_Layout from "./Layout/Main_Layout";
 import Home from "./Pages/Home/Home";
+import Canteen_Layout from "./Layout/Canteen_Layout";
+import Canteen_Home from "./Pages/Canteen/Canteen_Home";
+import Canteen_Details from "./Pages/Canteen/Canteen_Details";
 
 const router: RouteObject[] = [
   {
@@ -42,6 +45,21 @@ const router: RouteObject[] = [
       {
         path: "/home",
         element: <Home />,
+      },
+    ],
+  },
+  {
+    path: "/canteen",
+    element: <Canteen_Layout />,
+    errorElement: <ErrorElement />,
+    children: [
+      {
+        path: "/canteen",
+        element: <Canteen_Home />,
+      },
+      {
+        path: "/canteen/restaurant/:id",
+        element: <Canteen_Details />,
       },
     ],
   },

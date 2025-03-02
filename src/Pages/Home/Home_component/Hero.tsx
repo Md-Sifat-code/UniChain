@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
             Get Started
           </Link>
         </div>
-        <div>
+        <div className="flex justify-center items-center">
           <img src={logo} alt="" />
         </div>
       </div>

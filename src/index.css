@@ -25,3 +25,11 @@
   font-family: "Poppins", sans-serif;
 
 }
+
+/* This is the theme for the Canteen */
+.cancard{
+  background-color: #FAE5E5;
+}
+.textcanteen{
+  color: #FA5555 ;
+}
