@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-import { FaSearch, FaFilter } from "react-icons/fa";
+import { FaSearch, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import Navabr_Home from "../Home/Home_component/Navabr_Home";
 import { useNavigate } from "react-router-dom";
 const API_BASE_URL = import.meta.env.VITE_api_url;
@@ -25,6 +25,8 @@ const Canteen_Home: React.FC = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
     []
   );
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   const [featuredFoods, setFeaturedFoods] = useState<FoodItem[]>([]);
   const [loadingRestaurants, setLoadingRestaurants] = useState<boolean>(true);
   const [loadingFoods, setLoadingFoods] = useState<boolean>(true);
@@ -101,6 +103,15 @@ const Canteen_Home: React.FC = () => {
       </div>
     </motion.div>
   );
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = 300; // Adjust scrolling distance
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <section className="bgland">
@@ -123,12 +134,11 @@ const Canteen_Home: React.FC = () => {
         </div>
 
         {/* Restaurants Section */}
-        <div className="mt-8">
-          <h2 className="text-2xl font-semibold text-gray-800 roboto">
+        <div className="mt-8 relative">
+          <h2 className="text-3xl poppin mb-10 font-semibold text-gray-800 roboto">
             Checkout Restaurants
           </h2>
 
-          {/* Loading & Error States */}
           {error && <p className="text-center text-red-500 mt-4">{error}</p>}
           {filteredRestaurants.length === 0 &&
             !loadingRestaurants &&
@@ -138,8 +148,19 @@ const Canteen_Home: React.FC = () => {
               </p>
             )}
 
-          {/* Restaurant Cards or Skeletons */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
+          {/* Left Scroll Button */}
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-0 top-56 -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 transition z-10"
+          >
+            <FaChevronLeft className="text-red-600" />
+          </button>
+
+          {/* Scrollable Container */}
+          <div
+            ref={scrollRef}
+            className="flex gap-6 mt-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4 no-scrollbar"
+          >
             {loadingRestaurants
               ? Array.from({ length: 6 }).map((_, index) => (
                   <SkeletonCard key={index} />
@@ -148,33 +169,38 @@ const Canteen_Home: React.FC = () => {
                   <motion.div
                     key={restaurant.id}
                     whileHover={{ scale: 1.05 }}
-                    className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
+                    className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer snap-start flex-shrink-0 
+                     w-[calc(100%-1rem)] sm:w-[calc(100%/1-1rem)] md:w-[calc(100%/2-1rem)] lg:w-[calc(100%/3-1rem)]"
                     onClick={() => handleRestaurantClick(restaurant.id)}
                   >
                     <img
                       src={restaurant.imageUrl}
                       alt={restaurant.name}
-                      className="w-full h-64 object-cover"
+                      className="w-full h-72 object-cover"
                     />
                   </motion.div>
                 ))}
           </div>
+
+          {/* Right Scroll Button */}
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-0 top-56 -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 transition z-10"
+          >
+            <FaChevronRight className="text-red-600" />
+          </button>
         </div>
 
         {/* Featured Food Section */}
-        <div className="mt-12">
+        <div className="mt-24">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold text-gray-800">
+            <h2 className="text-3xl poppin mb-10 font-semibold text-gray-800">
               Featured Food
             </h2>
-            <FaFilter
-              className="text-gray-600 cursor-pointer hover:text-gray-800 transition"
-              size={24}
-            />
           </div>
 
           {/* Food Cards or Skeletons */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 mt-4">
             {loadingFoods
               ? Array.from({ length: 6 }).map((_, index) => (
                   <SkeletonCard key={index} />

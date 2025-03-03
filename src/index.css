@@ -33,3 +33,11 @@
 .textcanteen{
   color: #FA5555 ;
 }
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* Hide scrollbar for IE & Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}

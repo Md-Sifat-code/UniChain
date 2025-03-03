@@ -21,6 +21,7 @@ interface RestaurantDetails {
   description: string;
   location: string;
   contactNumber: string;
+  contactNumber2: string;
   email: string;
   isOpen: string;
   imageUrl: string;
@@ -51,19 +52,19 @@ const Canteen_Details: React.FC = () => {
   if (error) return <p className="text-center text-red-500 mt-6">{error}</p>;
 
   return (
-    <section className="min-h-screen bg-gray-50">
+    <section className="min-h-screen bg-[#f0f0f0]">
       <div className="container mx-auto p-6">
         <Navabr_Home />
 
         {/* Restaurant Details */}
-        <div className="flex flex-col lg:flex-row gap-12 mt-12">
+        <div className="flex flex-col lg:flex-row shadow-2xl rounded-2xl bg-white gap-12 mt-12 px-4 py-8">
           <img
             src={restaurant?.imageUrl}
             alt={restaurant?.name}
-            className="w-[250px] h-[250px] object-cover rounded-lg shadow-xl"
+            className="w-[200px]  h-[200px] object-cover rounded-lg shadow-xl "
           />
           <div>
-            <h2 className="text-3xl font-semibold text-gray-800">
+            <h2 className="text-3xl poppin font-semibold text-gray-800">
               {restaurant?.name}
             </h2>
             <p className="text-gray-600 mt-2">{restaurant?.description}</p>
@@ -93,7 +94,7 @@ const Canteen_Details: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-800">
             🍽️ Available Food Items
           </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 mt-8">
             {restaurant?.foodItems.map((food) => (
               <motion.div
                 key={food.id}

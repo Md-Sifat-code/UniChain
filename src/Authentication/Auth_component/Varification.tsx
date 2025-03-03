@@ -52,13 +52,13 @@ const Verification: React.FC = () => {
       if (!response.ok) {
         throw new Error(textResponse || "OTP verification failed.");
       }
+      navigate("/");
 
       alert(textResponse);
     } catch (err: any) {
       setError(err.message);
     } finally {
       setLoading(false);
-      navigate("/");
     }
   };
 
