@@ -32,11 +32,6 @@ const Login: React.FC = () => {
               className="w-full outline-none bg-transparent"
             />
           </div>
-          <div className="text-start text-sm text-gray-600 mt-1">
-            <Link to="#" className="text-blue-500 hover:underline">
-              Forgot Password?
-            </Link>
-          </div>
 
           <button className="w-full bgbutton text-white font-semibold py-2 rounded-md hover:opacity-90 transition">
             Login
