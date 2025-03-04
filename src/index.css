@@ -1,7 +1,6 @@
 @import "tailwindcss";
 /* DaisyUI plugin should be added in the Tailwind CSS configuration file, not in the CSS file */
 
-
 /* This is the theme for the Landing page */
 .bgland{
   background-color: #fdfbfb ;
@@ -40,4 +39,12 @@
 .no-scrollbar {
   -ms-overflow-style: none; /* Hide scrollbar for IE & Edge */
   scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+/* Force center the modal */
+#updateModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Ensure the modal stays on top */
 }

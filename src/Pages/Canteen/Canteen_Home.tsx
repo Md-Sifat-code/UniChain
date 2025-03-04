@@ -120,15 +120,15 @@ const Canteen_Home: React.FC = () => {
         <Navabr_Home />
 
         {/* Search Bar */}
-        <div className="flex justify-center mt-6">
-          <div className="flex items-center cancard shadow-md rounded-[18px] p-2 w-full max-w-7xl">
-            <FaSearch className="text-gray-500 ml-3" />
+        <div className="flex justify-center mb-6 mt-2">
+          <div className="flex items-center bg-white mb-6 shadow-md rounded-[18px] p-2 w-full max-w-3xl">
+            <FaSearch className="text-black ml-3" />
             <input
               type="text"
               placeholder="Search for restaurants..."
               value={searchQuery}
               onChange={handleSearch}
-              className="w-full p-2 outline-none text-gray-700 bg-transparent"
+              className="w-full p-2  outline-none text-gray-700 bg-transparent"
             />
           </div>
         </div>
@@ -153,7 +153,7 @@ const Canteen_Home: React.FC = () => {
             onClick={() => scroll("left")}
             className="absolute left-0 top-56 -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 transition z-10"
           >
-            <FaChevronLeft className="text-red-600" />
+            <FaChevronLeft className="text-red-600 text-2xl" />
           </button>
 
           {/* Scrollable Container */}
@@ -187,7 +187,7 @@ const Canteen_Home: React.FC = () => {
             onClick={() => scroll("right")}
             className="absolute right-0 top-56 -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md hover:bg-gray-300 transition z-10"
           >
-            <FaChevronRight className="text-red-600" />
+            <FaChevronRight className="text-red-600 text-2xl" />
           </button>
         </div>
 
@@ -195,7 +195,7 @@ const Canteen_Home: React.FC = () => {
         <div className="mt-24">
           <div className="flex justify-between items-center">
             <h2 className="text-3xl poppin mb-10 font-semibold text-gray-800">
-              Featured Food
+              Todays Food
             </h2>
           </div>
 

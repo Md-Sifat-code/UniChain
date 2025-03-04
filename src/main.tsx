@@ -19,6 +19,8 @@ import Canteen_Details from "./Pages/Canteen/Canteen_Details";
 import Login from "./Authentication/Auth_component/Login";
 import { AuthProvider } from "./Authentication/Context_auth/AuthContext";
 import { UserProvider } from "./Authentication/Context_auth/UserContext";
+import Student from "./Pages/Profile/Student";
+import ProfileUpdate from "./Pages/Profile/Profile_component/ProfileUpdate";
 
 const router: RouteObject[] = [
   {
@@ -48,6 +50,14 @@ const router: RouteObject[] = [
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/home/student/profile",
+        element: <Student />,
+      },
+      {
+        path: "/home/profile/update",
+        element: <ProfileUpdate />,
       },
     ],
   },

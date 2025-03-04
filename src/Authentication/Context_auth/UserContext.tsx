@@ -27,6 +27,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       if (!response.ok) throw new Error("Failed to fetch user details");
 
       const data = await response.json();
+      console.log("User details:", data);
       setUser(data);
     } catch (error) {
       console.error("Error fetching user details:", error);
