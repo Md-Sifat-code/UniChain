@@ -21,6 +21,7 @@ import { AuthProvider } from "./Authentication/Context_auth/AuthContext";
 import { UserProvider } from "./Authentication/Context_auth/UserContext";
 import Student from "./Pages/Profile/Student";
 import ProfileUpdate from "./Pages/Profile/Profile_component/ProfileUpdate";
+import { StudentProvider } from "./Authentication/Context_auth/StudentContext";
 
 const router: RouteObject[] = [
   {
@@ -84,7 +85,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <AuthProvider>
       <UserProvider>
-        <RouterProvider router={browserRouter} />
+        <StudentProvider>
+          <RouterProvider router={browserRouter} />
+        </StudentProvider>
       </UserProvider>
     </AuthProvider>
   </React.StrictMode>
