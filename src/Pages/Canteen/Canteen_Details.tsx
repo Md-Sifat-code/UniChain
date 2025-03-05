@@ -4,6 +4,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import Navabr_Home from "../Home/Home_component/Navabr_Home";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
+import { useUser } from "../../Authentication/Context_auth/UserContext";
 const API_BASE_URL = import.meta.env.VITE_api_url;
 
 interface FoodItem {
@@ -41,6 +42,10 @@ const Canteen_Details: React.FC = () => {
   const [restaurant, setRestaurant] = useState<RestaurantDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useUser(); // Get user details from context
+  const isAdmin = user?.roles?.some(
+    (role: { roleType: string }) => role.roleType === "ADMIN"
+  );
 
   useEffect(() => {
     axios
@@ -98,6 +103,12 @@ const Canteen_Details: React.FC = () => {
               >
                 {restaurant?.isOpen.toUpperCase()}
               </p>
+              {/* Show Update Info Button for Admins */}
+              {isAdmin && (
+                <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                  Update Info
+                </button>
+              )}
             </div>
           </div>
 
@@ -195,3 +206,4 @@ const Canteen_Details: React.FC = () => {
 };
 
 export default Canteen_Details;
+//okk

@@ -24,6 +24,7 @@ import ProfileUpdate from "./Pages/Profile/Profile_component/ProfileUpdate";
 import { StudentProvider } from "./Authentication/Context_auth/StudentContext";
 import Event_Layout from "./Layout/Event_Layout";
 import Event_Home from "./Pages/Event/Event_Home";
+import Club_Details from "./Pages/Event/Club_Details";
 
 const router: RouteObject[] = [
   {
@@ -87,6 +88,10 @@ const router: RouteObject[] = [
       {
         path: "/event",
         element: <Event_Home />,
+      },
+      {
+        path: "/event/club/:id",
+        element: <Club_Details />,
       },
     ],
   },
