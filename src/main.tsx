@@ -22,6 +22,8 @@ import { UserProvider } from "./Authentication/Context_auth/UserContext";
 import Student from "./Pages/Profile/Student";
 import ProfileUpdate from "./Pages/Profile/Profile_component/ProfileUpdate";
 import { StudentProvider } from "./Authentication/Context_auth/StudentContext";
+import Event_Layout from "./Layout/Event_Layout";
+import Event_Home from "./Pages/Event/Event_Home";
 
 const router: RouteObject[] = [
   {
@@ -74,6 +76,17 @@ const router: RouteObject[] = [
       {
         path: "/canteen/restaurant/:id",
         element: <Canteen_Details />,
+      },
+    ],
+  },
+  {
+    path: "/event",
+    element: <Event_Layout />,
+    errorElement: <ErrorElement />,
+    children: [
+      {
+        path: "/event",
+        element: <Event_Home />,
       },
     ],
   },

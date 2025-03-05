@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaUserCircle } from "react-icons/fa";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../../Authentication/Context_auth/UserContext";
-
+import logo from "/logos.png";
 const Navabr_Home: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -96,9 +96,11 @@ const Navabr_Home: React.FC = () => {
 
         {/* User Icon with Dropdown Menu */}
         <div className="relative mt-4 sm:mt-0" ref={dropdownRef}>
-          <FaUserCircle
-            className="text-5xl text-gray-700 cursor-pointer hover:text-blue-600 transition"
+          <img
             onClick={toggleDropdown}
+            className="w-[50px] border border-blue-600 h-[50px] rounded-full cursor-pointer"
+            src={logo}
+            alt=""
           />
 
           {/* Dropdown Menu */}

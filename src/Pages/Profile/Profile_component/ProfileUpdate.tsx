@@ -129,7 +129,7 @@ const ProfileUpdate: React.FC = () => {
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto bg-white shadow-lg rounded-lg border border-gray-200">
+    <div className="p-6 max-w-2xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200">
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
         Update Profile
       </h2>

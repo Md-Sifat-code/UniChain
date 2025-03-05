@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 interface UserContextType {
   user: any;
@@ -11,6 +11,17 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<any>(null);
+
+  // Fetch user details on page load
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    console.log("Stored username:", storedUsername);
+    const storedToken = localStorage.getItem("token");
+
+    if (storedUsername && storedToken) {
+      fetchUserDetails(storedUsername, storedToken);
+    }
+  }, []); // Runs once when the component mounts
 
   const fetchUserDetails = async (username: string, token: string) => {
     try {

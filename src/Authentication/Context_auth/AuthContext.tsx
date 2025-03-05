@@ -19,17 +19,18 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  // Use localStorage to persist data even after browser restarts
   const [token, setToken] = useState<string | null>(
-    sessionStorage.getItem("token")
+    localStorage.getItem("token")
   );
   const [username, setUsername] = useState<string | null>(
-    sessionStorage.getItem("username")
+    localStorage.getItem("username")
   );
   const [email, setEmail] = useState<string | null>(
-    sessionStorage.getItem("email")
+    localStorage.getItem("email")
   );
   const [roles, setRoles] = useState<string[]>(
-    JSON.parse(sessionStorage.getItem("roles") || "[]")
+    JSON.parse(localStorage.getItem("roles") || "[]")
   );
 
   const login = (
@@ -43,10 +44,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setEmail(email);
     setRoles(roles);
 
-    sessionStorage.setItem("token", token);
-    sessionStorage.setItem("username", username);
-    sessionStorage.setItem("email", email);
-    sessionStorage.setItem("roles", JSON.stringify(roles));
+    // Store in localStorage so it persists across browser restarts
+    localStorage.setItem("token", token);
+    localStorage.setItem("username", username);
+    localStorage.setItem("email", email);
+    localStorage.setItem("roles", JSON.stringify(roles));
   };
 
   const logout = () => {
@@ -55,7 +57,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setEmail(null);
     setRoles([]);
 
-    sessionStorage.clear();
+    // Clear localStorage on logout
+    localStorage.clear();
   };
 
   return (

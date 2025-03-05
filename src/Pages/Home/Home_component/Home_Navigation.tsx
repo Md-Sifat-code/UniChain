@@ -35,7 +35,7 @@ const cards = [
     icon: <FaCalendarAlt />,
     color: "text-red-500",
     bg: "bg-red-100",
-    link: "/event-management",
+    link: "/event",
   },
 ];
 
