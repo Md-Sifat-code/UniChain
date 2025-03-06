@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Navabr_Home from "../Home/Home_component/Navabr_Home";
+import { useUser } from "../../Authentication/Context_auth/UserContext";
 
 const API_BASE_URL = import.meta.env.VITE_api_url; // Load base URL from env
 
@@ -9,6 +10,10 @@ const Facultypage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate(); // Initialize navigation
+  const { user } = useUser(); // Get user details from context
+  const isAdmin = user?.roles?.some(
+    (role: { roleType: string }) => role.roleType === "ADMIN"
+  );
 
   useEffect(() => {
     const fetchFaculty = async () => {
@@ -38,9 +43,19 @@ const Facultypage: React.FC = () => {
       <div className="mb-12">
         <Navabr_Home />
       </div>
-      <h1 className="text-4xl font-extrabold text-center mb-10 text-gray-800">
-        Faculty Members
-      </h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-extrabold text-center mb-10 text-gray-800">
+          Faculty Members
+        </h1>
+        {isAdmin && (
+          <button
+            onClick={() => navigate("/class/faculty/create")}
+            className="px-8 font-bold py-3 bg-blue-300 rounded-4xl"
+          >
+            Add Faculty
+          </button>
+        )}
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {faculty.map((prof) => (
           <div
@@ -50,11 +65,7 @@ const Facultypage: React.FC = () => {
             <div className="p-6">
               <div className="flex justify-center">
                 <img
-                  src={
-                    prof.image
-                      ? `${API_BASE_URL}/${prof.image}`
-                      : "/default-user.png"
-                  }
+                  src={prof.image}
                   alt={prof.name}
                   className="w-32 h-32 rounded-full object-cover border-4 border-gray-300"
                 />

@@ -34,6 +34,7 @@ import Class_Layout from "./Layout/Class_Layout";
 import Facultypage from "./Pages/ClassTime/Facultypage";
 import Course from "./Pages/ClassTime/Course";
 import CourseDetails from "./Pages/ClassTime/CourseDetails";
+import FacultyCreate from "./Update/FacultyCreate";
 
 const router: RouteObject[] = [
   {
@@ -143,6 +144,10 @@ const router: RouteObject[] = [
       {
         path: "/class/course_details/:id",
         element: <CourseDetails />,
+      },
+      {
+        path: "/class/faculty/create",
+        element: <FacultyCreate />,
       },
     ],
   },
