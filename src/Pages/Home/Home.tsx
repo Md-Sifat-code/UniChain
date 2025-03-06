@@ -70,11 +70,12 @@ const Home: React.FC = () => {
 
         {/* Floating Robot Button */}
         <button
-          className="fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition"
+          className="fixed bottom-18 right-24 bg-blue-600 text-white p-4 rounded-full flex flex-col items-center shadow-lg hover:bg-blue-700 transition"
           onClick={() => setIsModalOpen(true)}
         >
-          <BsRobot size={30} />
+          <BsRobot size={50} />
         </button>
+        <h1 className="fixed bottom-10 right-24  font-bold">Personal AI</h1>
 
         {/* Modal for Chatbot */}
         {isModalOpen && (

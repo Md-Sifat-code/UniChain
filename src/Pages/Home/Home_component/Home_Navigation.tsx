@@ -14,7 +14,7 @@ const cards = [
     icon: <FaBus />,
     color: "text-blue-500",
     bg: "bg-blue-100",
-    link: "/bus-routes",
+    link: "/bus",
   },
   {
     title: "Canteen",
