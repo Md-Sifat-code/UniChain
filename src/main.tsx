@@ -41,6 +41,10 @@ import AddExam from "./Update/AddExam";
 import AddAssignment from "./Update/AddAssignment";
 import Bus_Home from "./Pages/BusRoute/Bus_Home";
 import BusLayout from "./Layout/BusLayout";
+import Bus_Details from "./Pages/BusRoute/Bus_Details";
+import Bus_Create from "./Update/Bus_Create";
+import Route_Create from "./Update/Route_Create";
+import AnnouncementCreate from "./Update/AnnouncementCreate";
 
 const router: RouteObject[] = [
   {
@@ -181,6 +185,22 @@ const router: RouteObject[] = [
       {
         path: "/bus",
         element: <Bus_Home />,
+      },
+      {
+        path: "/bus/:id",
+        element: <Bus_Details />,
+      },
+      {
+        path: "/bus/create",
+        element: <Bus_Create />,
+      },
+      {
+        path: "/bus/update/:id",
+        element: <Route_Create />,
+      },
+      {
+        path: "/bus/announcement/:id",
+        element: <AnnouncementCreate />,
       },
     ],
   },

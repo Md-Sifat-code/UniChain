@@ -17,10 +17,14 @@ interface Club {
 interface Event {
   id: number;
   title: string;
-  date: string;
+  description: string;
+  startTime: string;
+  endTime: string;
+  location: string;
   imageUrl: string;
 }
 
+console.log(Event);
 const Event_Home: React.FC = () => {
   const [clubs, setClubs] = useState<Club[]>([]);
   const [filteredClubs, setFilteredClubs] = useState<Club[]>([]);
@@ -56,15 +60,19 @@ const Event_Home: React.FC = () => {
   }, []);
 
   // Fetch events
+  // Fetch events
   useEffect(() => {
     axios
       .get(`${API_BASE_URL}/event`)
       .then((response) => {
         const eventData = response.data.map((event: any) => ({
           id: event.id,
-          name: event.name,
-          date: event.date,
-          imageUrl: event.imageUrl ? event.imageUrl : PLACEHOLDER_IMAGE,
+          title: event.title, // ✅ Correct key
+          description: event.description, // ✅ Add description
+          startTime: event.startTime, // ✅ Add start time
+          endTime: event.endTime, // ✅ Add end time
+          location: event.location, // ✅ Add location
+          imageUrl: event.imageUrl ? event.imageUrl : PLACEHOLDER_IMAGE, // ✅ Handle missing images
         }));
 
         setEvents(eventData);
@@ -195,26 +203,31 @@ const Event_Home: React.FC = () => {
             </h2>
           </div>
 
-          {/* Event Cards or Skeletons */}
-          <div className="grid grid-cols-1  gap-6 mt-4">
-            {loadingEvents
-              ? Array.from({ length: 6 }).map((_, index) => (
-                  <SkeletonCard key={index} />
-                ))
-              : events.map((event) => (
-                  <motion.div
-                    key={event.id}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
-                  >
-                    <img
-                      src={event.imageUrl}
-                      alt={event.title}
-                      className="w-full h-96 object-cover"
-                    />
-                    <h1>{event.title}</h1>
-                  </motion.div>
-                ))}
+          <div className="grid grid-cols-1 md:grid-cols-2  gap-6 mt-4">
+            {loadingEvents ? (
+              <p>Loading events...</p>
+            ) : (
+              events.map((event) => (
+                <motion.div
+                  key={event.id}
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
+                >
+                  <img
+                    src={event.imageUrl}
+                    alt={event.title}
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="p-4">
+                    <h1 className="text-xl font-semibold">{event.title}</h1>
+                    <p className="text-gray-500 mt-1">
+                      📅 {event.startTime} - {event.endTime}
+                    </p>
+                    <p className="text-gray-500">📍 {event.location}</p>
+                  </div>
+                </motion.div>
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -223,3 +236,4 @@ const Event_Home: React.FC = () => {
 };
 
 export default Event_Home;
+//okk

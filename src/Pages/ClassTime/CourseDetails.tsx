@@ -76,16 +76,46 @@ const CourseDetails: React.FC = () => {
       </h1>
 
       {/* Course Card */}
-      <div className="bg-white shadow-lg rounded-xl border border-gray-200 p-6 mb-8">
-        <h2 className="text-2xl font-bold text-gray-900">{course.name}</h2>
-        <p className="text-gray-600">📌 Code: {course.code}</p>
+      <div className="bg-white flex flex-col md:flex-row justify-between shadow-lg rounded-xl border border-gray-200 p-6 mb-8">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">{course.name}</h2>
+          <p className="text-gray-600">📌 Code: {course.code}</p>
 
-        {course.faculty && (
-          <div className="mt-4">
-            <h3 className="text-lg font-semibold">Instructor:</h3>
-            <p className="text-gray-700">{course.faculty.name}</p>
-          </div>
-        )}
+          {course.faculty && (
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold">Instructor:</h3>
+              <p className="text-gray-700">{course.faculty.name}</p>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col gap-2">
+          {isAdmin && (
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded-md flex items-center hover:bg-blue-700 transition"
+              onClick={() => navigate(`/class/course/addclass/${courseId}`)}
+            >
+              <FaPlus className="mr-2" /> Add Class
+            </button>
+          )}
+          {isAdmin && (
+            <button
+              className="bg-red-600 text-white px-4 py-2 rounded-md flex items-center hover:bg-red-700 transition"
+              onClick={() => navigate(`/class/course/addexam/${courseId}`)} // ✅ Added Navigation
+            >
+              <FaPlus className="mr-2" /> Add Exam
+            </button>
+          )}
+          {isAdmin && (
+            <button
+              className="bg-yellow-600 text-white px-4 py-2 rounded-md flex items-center hover:bg-yellow-700 transition"
+              onClick={() =>
+                navigate(`/class/course/addassignment/${courseId}`)
+              }
+            >
+              <FaPlus className="mr-2" /> Add Assignment
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Class Schedule */}
@@ -95,14 +125,6 @@ const CourseDetails: React.FC = () => {
             <h3 className="text-2xl font-semibold text-gray-900">
               📅 Class Schedule
             </h3>
-            {isAdmin && (
-              <button
-                className="bg-blue-600 text-white px-4 py-2 rounded-md flex items-center hover:bg-blue-700 transition"
-                onClick={() => navigate(`/class/course/addclass/${courseId}`)}
-              >
-                <FaPlus className="mr-2" /> Add Class
-              </button>
-            )}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {course.classSchedules.map((schedule: any) => (
@@ -136,14 +158,6 @@ const CourseDetails: React.FC = () => {
             <h3 className="text-2xl font-semibold text-gray-900">
               📝 Exam Schedule
             </h3>
-            {isAdmin && (
-              <button
-                className="bg-red-600 text-white px-4 py-2 rounded-md flex items-center hover:bg-red-700 transition"
-                onClick={() => navigate(`/class/course/addexam/${courseId}`)} // ✅ Added Navigation
-              >
-                <FaPlus className="mr-2" /> Add Exam
-              </button>
-            )}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {course.examSchedules.map((exam: any) => (
@@ -180,16 +194,6 @@ const CourseDetails: React.FC = () => {
             <h3 className="text-2xl font-semibold text-gray-900">
               📖 Assignments
             </h3>
-            {isAdmin && (
-              <button
-                className="bg-yellow-600 text-white px-4 py-2 rounded-md flex items-center hover:bg-yellow-700 transition"
-                onClick={() =>
-                  navigate(`/class/course/addassignment/${courseId}`)
-                }
-              >
-                <FaPlus className="mr-2" /> Add Assignment
-              </button>
-            )}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {course.assignments.map((assignment: any) => (
