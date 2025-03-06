@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import Navabr_Home from "../Home/Home_component/Navabr_Home";
@@ -34,7 +34,7 @@ const Club_Details: React.FC = () => {
   const [club, setClub] = useState<ClubDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  const navigate = useNavigate();
   const isAdmin = user?.roles?.some(
     (role: { roleType: string }) => role.roleType === "ADMIN"
   );
@@ -89,7 +89,10 @@ const Club_Details: React.FC = () => {
 
               {/* Show Update Info Button for Admins */}
               {isAdmin && (
-                <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                <button
+                  onClick={() => navigate(`/event/update/${id}`)}
+                  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                >
                   Update Info
                 </button>
               )}

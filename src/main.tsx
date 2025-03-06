@@ -25,6 +25,10 @@ import { StudentProvider } from "./Authentication/Context_auth/StudentContext";
 import Event_Layout from "./Layout/Event_Layout";
 import Event_Home from "./Pages/Event/Event_Home";
 import Club_Details from "./Pages/Event/Club_Details";
+import Club_update from "./Update/Club_update";
+import Dashboard_Layout from "./Layout/Dashboard_Layout";
+import Student_Dashboard from "./Pages/Dashboard/Student_Dashboard";
+import Admin_Dashboard from "./Pages/Dashboard/Admin_Dashboard";
 
 const router: RouteObject[] = [
   {
@@ -92,6 +96,25 @@ const router: RouteObject[] = [
       {
         path: "/event/club/:id",
         element: <Club_Details />,
+      },
+      {
+        path: "/event/update/:id",
+        element: <Club_update />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard_Layout />,
+    errorElement: <ErrorElement />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Student_Dashboard />,
+      },
+      {
+        path: "/dashboard/admin",
+        element: <Admin_Dashboard />,
       },
     ],
   },

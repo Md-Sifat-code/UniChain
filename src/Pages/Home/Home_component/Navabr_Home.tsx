@@ -115,11 +115,18 @@ const Navabr_Home: React.FC = () => {
                   Profile
                 </button>
                 <Link
-                  to={"/dashboard"}
+                  to={
+                    user?.roles?.some(
+                      (role: { roleType: string }) => role.roleType === "ADMIN"
+                    )
+                      ? "/dashboard/admin"
+                      : "/dashboard"
+                  }
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                 >
                   Dashboard
                 </Link>
+
                 <button
                   onClick={handleLogout}
                   className="px-4 py-2 text-left hover:bg-red-500 hover:text-white cursor-pointer"
