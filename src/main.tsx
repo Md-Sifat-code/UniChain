@@ -36,6 +36,9 @@ import Course from "./Pages/ClassTime/Course";
 import CourseDetails from "./Pages/ClassTime/CourseDetails";
 import FacultyCreate from "./Update/FacultyCreate";
 import CourseCreate from "./Update/CourseCreate";
+import AddClass from "./Update/AddClass";
+import AddExam from "./Update/AddExam";
+import AddAssignment from "./Update/AddAssignment";
 
 const router: RouteObject[] = [
   {
@@ -153,6 +156,18 @@ const router: RouteObject[] = [
       {
         path: "/class/course/create/:facultyId", // Route now expects a facultyId
         element: <CourseCreate />,
+      },
+      {
+        path: "/class/course/addclass/:courseId",
+        element: <AddClass />,
+      },
+      {
+        path: "/class/course/addexam/:courseId",
+        element: <AddExam />,
+      },
+      {
+        path: "/class/course/addassignment/:courseId",
+        element: <AddAssignment />,
       },
     ],
   },
