@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Navabr_Home from "../Home/Home_component/Navabr_Home";
 
 const API_BASE_URL = import.meta.env.VITE_api_url; // Load base URL from env
@@ -7,11 +8,12 @@ const Facultypage: React.FC = () => {
   const [faculty, setFaculty] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate(); // Initialize navigation
 
   useEffect(() => {
     const fetchFaculty = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/Faculty`); // Append /Faculty to base URL
+        const response = await fetch(`${API_BASE_URL}/Faculty`); // Fetch faculty data
         if (!response.ok) {
           throw new Error("Failed to fetch faculty data");
         }
@@ -36,6 +38,9 @@ const Facultypage: React.FC = () => {
       <div className="mb-12">
         <Navabr_Home />
       </div>
+      <h1 className="text-4xl font-extrabold text-center mb-10 text-gray-800">
+        Faculty Members
+      </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {faculty.map((prof) => (
           <div
@@ -71,7 +76,10 @@ const Facultypage: React.FC = () => {
               </div>
 
               <div className="mt-6 text-center">
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                <button
+                  onClick={() => navigate(`/class/${prof.id}`)} // Navigate to /class/{id}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+                >
                   View Courses
                 </button>
               </div>

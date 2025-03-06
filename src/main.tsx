@@ -32,6 +32,8 @@ import Admin_Dashboard from "./Pages/Dashboard/Admin_Dashboard";
 import Canteen_Update from "./Update/Canteen_Update";
 import Class_Layout from "./Layout/Class_Layout";
 import Facultypage from "./Pages/ClassTime/Facultypage";
+import Course from "./Pages/ClassTime/Course";
+import CourseDetails from "./Pages/ClassTime/CourseDetails";
 
 const router: RouteObject[] = [
   {
@@ -133,6 +135,14 @@ const router: RouteObject[] = [
       {
         path: "/class",
         element: <Facultypage />,
+      },
+      {
+        path: "/class/:id",
+        element: <Course />,
+      },
+      {
+        path: "/class/course_details/:id",
+        element: <CourseDetails />,
       },
     ],
   },
