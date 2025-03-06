@@ -29,6 +29,7 @@ import Club_update from "./Update/Club_update";
 import Dashboard_Layout from "./Layout/Dashboard_Layout";
 import Student_Dashboard from "./Pages/Dashboard/Student_Dashboard";
 import Admin_Dashboard from "./Pages/Dashboard/Admin_Dashboard";
+import Canteen_Update from "./Update/Canteen_Update";
 
 const router: RouteObject[] = [
   {
@@ -81,6 +82,10 @@ const router: RouteObject[] = [
       {
         path: "/canteen/restaurant/:id",
         element: <Canteen_Details />,
+      },
+      {
+        path: "/canteen/update/:id",
+        element: <Canteen_Update />,
       },
     ],
   },

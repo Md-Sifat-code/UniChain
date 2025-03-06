@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import Navabr_Home from "../Home/Home_component/Navabr_Home";
@@ -40,6 +40,7 @@ const daysOfWeek = [
 const Canteen_Details: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [restaurant, setRestaurant] = useState<RestaurantDetails | null>(null);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { user } = useUser(); // Get user details from context
@@ -103,9 +104,11 @@ const Canteen_Details: React.FC = () => {
               >
                 {restaurant?.isOpen.toUpperCase()}
               </p>
-              {/* Show Update Info Button for Admins */}
               {isAdmin && (
-                <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                <button
+                  onClick={() => navigate(`/canteen/update/${id}`)}
+                  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                >
                   Update Info
                 </button>
               )}
