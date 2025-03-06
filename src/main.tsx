@@ -30,6 +30,8 @@ import Dashboard_Layout from "./Layout/Dashboard_Layout";
 import Student_Dashboard from "./Pages/Dashboard/Student_Dashboard";
 import Admin_Dashboard from "./Pages/Dashboard/Admin_Dashboard";
 import Canteen_Update from "./Update/Canteen_Update";
+import Class_Layout from "./Layout/Class_Layout";
+import Facultypage from "./Pages/ClassTime/Facultypage";
 
 const router: RouteObject[] = [
   {
@@ -120,6 +122,17 @@ const router: RouteObject[] = [
       {
         path: "/dashboard/admin",
         element: <Admin_Dashboard />,
+      },
+    ],
+  },
+  {
+    path: "/class",
+    element: <Class_Layout />,
+    errorElement: <ErrorElement />,
+    children: [
+      {
+        path: "/class",
+        element: <Facultypage />,
       },
     ],
   },

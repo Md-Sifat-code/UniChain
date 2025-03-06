@@ -28,7 +28,7 @@ const cards = [
     icon: <FaClipboardList />,
     color: "text-purple-500",
     bg: "bg-purple-100",
-    link: "/class-schedule",
+    link: "/class",
   },
   {
     title: "Event Management",
