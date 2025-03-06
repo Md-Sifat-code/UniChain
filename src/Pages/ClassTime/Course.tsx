@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useUser } from "../../Authentication/Context_auth/UserContext";
 
 const API_BASE_URL = import.meta.env.VITE_api_url;
 
@@ -9,6 +10,10 @@ const Course: React.FC = () => {
   const [faculty, setFaculty] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useUser(); // Get user details from context
+  const isAdmin = user?.roles?.some(
+    (role: { roleType: string }) => role.roleType === "ADMIN"
+  );
 
   useEffect(() => {
     const fetchFacultyDetails = async () => {
@@ -41,11 +46,7 @@ const Course: React.FC = () => {
       <div className="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200 p-6 mb-8">
         <div className="flex flex-col items-center">
           <img
-            src={
-              faculty.image
-                ? `${API_BASE_URL}/${faculty.image}`
-                : "/default-user.png"
-            }
+            src={faculty.image}
             alt={faculty.name}
             className="w-40 h-40 rounded-full object-cover border-4 border-gray-300"
           />
@@ -60,6 +61,14 @@ const Course: React.FC = () => {
             <p className="text-sm font-medium text-gray-700">Contact:</p>
             <p className="text-sm text-gray-600">📧 {faculty.email}</p>
             <p className="text-sm text-gray-600">📞 {faculty.phone}</p>
+            {isAdmin && (
+              <button
+                onClick={() => navigate(`/class/course/create/${id}`)} // Navigate to CourseCreate
+                className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+              >
+                Add Course
+              </button>
+            )}
           </div>
         </div>
       </div>
