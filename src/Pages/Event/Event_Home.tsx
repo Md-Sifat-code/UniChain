@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FaSearch, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import Navabr_Home from "../Home/Home_component/Navabr_Home";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../Authentication/Context_auth/UserContext";
 
 const API_BASE_URL = import.meta.env.VITE_api_url;
 const PLACEHOLDER_IMAGE = "https://via.placeholder.com/200";
@@ -36,7 +37,10 @@ const Event_Home: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const navigate = useNavigate();
-
+  const { user } = useUser(); // Get user details from context
+  const isAdmin = user?.roles?.some(
+    (role: { roleType: string }) => role.roleType === "ADMIN"
+  );
   // Fetch clubs
   useEffect(() => {
     axios
@@ -143,9 +147,19 @@ const Event_Home: React.FC = () => {
 
         {/* Clubs Section */}
         <div className="mt-8 relative">
-          <h2 className="text-3xl poppin mb-10 font-semibold text-gray-800 roboto">
-            Explore Clubs
-          </h2>
+          <div className=" flex flex-row justify-between items-center">
+            <h2 className="text-3xl poppin mb-10 font-semibold text-gray-800 roboto">
+              Explore Clubs
+            </h2>
+            {isAdmin && (
+              <button
+                onClick={() => navigate("/event/clubcreate")}
+                className="px-8 font-bold py-3 bg-blue-300 rounded-4xl"
+              >
+                Add Cllub
+              </button>
+            )}
+          </div>
 
           {error && <p className="text-center text-red-500 mt-4">{error}</p>}
           {filteredClubs.length === 0 && !loadingClubs && !error && (

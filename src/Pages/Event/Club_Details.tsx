@@ -88,23 +88,25 @@ const Club_Details: React.FC = () => {
               </p>
 
               {/* Show Update Info Button for Admins */}
-              {isAdmin && (
-                <button
-                  onClick={() => navigate(`/event/update/${id}`)}
-                  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-                >
-                  Update Info
-                </button>
-              )}
             </div>
           </div>
         </div>
 
         {/* Club Events Section */}
         <div className="mt-16">
-          <h1 className="text-3xl font-bold text-gray-800">
-            🎉 Upcoming Events
-          </h1>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-800">
+              🎉 Upcoming Events
+            </h1>
+            {isAdmin && (
+              <button
+                onClick={() => navigate(`/event/create/${id}`)}
+                className="px-8 font-bold py-3 bg-blue-300 rounded-4xl"
+              >
+                Add Event
+              </button>
+            )}
+          </div>
 
           {club?.events?.length ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
@@ -135,15 +137,6 @@ const Club_Details: React.FC = () => {
                       </span>
                     </div>
                   </div>
-
-                  {/* Show Update Info Button for Admins on Events */}
-                  {isAdmin && (
-                    <div className="absolute bottom-4 right-4">
-                      <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                        Update Info
-                      </button>
-                    </div>
-                  )}
                 </motion.div>
               ))}
             </div>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FaSearch, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import Navabr_Home from "../Home/Home_component/Navabr_Home";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../Authentication/Context_auth/UserContext";
 const API_BASE_URL = import.meta.env.VITE_api_url;
 const PLACEHOLDER_IMAGE = "https://via.placeholder.com/200";
 
@@ -33,6 +34,11 @@ const Canteen_Home: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const navigate = useNavigate();
+  const { user } = useUser(); // Get user details from context
+  const isAdmin = user?.roles?.some(
+    (role: { roleType: string }) => role.roleType === "ADMIN"
+  );
+  const userId = user?.id; // Extract userId
   // Fetch restaurants
   useEffect(() => {
     axios
@@ -135,10 +141,19 @@ const Canteen_Home: React.FC = () => {
 
         {/* Restaurants Section */}
         <div className="mt-8 relative">
-          <h2 className="text-3xl poppin mb-10 font-semibold text-gray-800 roboto">
-            Checkout Restaurants
-          </h2>
-
+          <div className="flex flex-row justify-between items-center">
+            <h2 className="text-3xl poppin mb-10 font-semibold text-gray-800 roboto">
+              Checkout Restaurants
+            </h2>
+            {isAdmin && (
+              <button
+                onClick={() => navigate(`/canteen/restaurantcreate/${userId}`)}
+                className="px-8 font-bold py-3 bg-blue-500 text-white rounded-4xl hover:bg-blue-600 transition"
+              >
+                Add Restaurant
+              </button>
+            )}
+          </div>
           {error && <p className="text-center text-red-500 mt-4">{error}</p>}
           {filteredRestaurants.length === 0 &&
             !loadingRestaurants &&

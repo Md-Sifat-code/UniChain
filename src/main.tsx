@@ -45,6 +45,9 @@ import Bus_Details from "./Pages/BusRoute/Bus_Details";
 import Bus_Create from "./Update/Bus_Create";
 import Route_Create from "./Update/Route_Create";
 import AnnouncementCreate from "./Update/AnnouncementCreate";
+import Restaurant_Create from "./Update/Restaurant_Create";
+import Club_create from "./Update/Club_create";
+import Event_create from "./Update/Event_create";
 
 const router: RouteObject[] = [
   {
@@ -102,6 +105,10 @@ const router: RouteObject[] = [
         path: "/canteen/update/:id",
         element: <Canteen_Update />,
       },
+      {
+        path: "/canteen/restaurantcreate/:userId",
+        element: <Restaurant_Create />,
+      },
     ],
   },
   {
@@ -120,6 +127,14 @@ const router: RouteObject[] = [
       {
         path: "/event/update/:id",
         element: <Club_update />,
+      },
+      {
+        path: "/event/clubcreate",
+        element: <Club_create />,
+      },
+      {
+        path: "/event/create/:clubId",
+        element: <Event_create />,
       },
     ],
   },
