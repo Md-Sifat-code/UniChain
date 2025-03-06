@@ -39,6 +39,8 @@ import CourseCreate from "./Update/CourseCreate";
 import AddClass from "./Update/AddClass";
 import AddExam from "./Update/AddExam";
 import AddAssignment from "./Update/AddAssignment";
+import Bus_Home from "./Pages/BusRoute/Bus_Home";
+import BusLayout from "./Layout/BusLayout";
 
 const router: RouteObject[] = [
   {
@@ -168,6 +170,17 @@ const router: RouteObject[] = [
       {
         path: "/class/course/addassignment/:courseId",
         element: <AddAssignment />,
+      },
+    ],
+  },
+  {
+    path: "/bus",
+    element: <BusLayout />,
+    errorElement: <ErrorElement />,
+    children: [
+      {
+        path: "/bus",
+        element: <Bus_Home />,
       },
     ],
   },

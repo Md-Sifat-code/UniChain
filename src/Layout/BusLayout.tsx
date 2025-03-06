@@ -2,15 +2,15 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Navabr_Home from "../Pages/Home/Home_component/Navabr_Home";
 
-const Event_Layout: React.FC = () => {
+const BusLayout: React.FC = () => {
   return (
-    <section>
-      <div>
+    <div>
+      <div className="container mx-auto p-6">
         <Navabr_Home />
-        <Outlet />
       </div>
-    </section>
+      <Outlet />
+    </div>
   );
 };
 
-export default Event_Layout;
+export default BusLayout;
