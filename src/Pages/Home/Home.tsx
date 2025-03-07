@@ -4,6 +4,7 @@ import Hero from "./Home_component/Hero";
 import Home_Navigation from "./Home_component/Home_Navigation";
 import { BsRobot } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa";
+import { FaMicrophone } from "react-icons/fa"; // Add the microphone icon
 import { useUser } from "../../Authentication/Context_auth/UserContext"; // Import useUser to get logged-in user info
 
 const Home: React.FC = () => {
@@ -11,6 +12,18 @@ const Home: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messages, setMessages] = useState<string[]>([]);
   const [newMessage, setNewMessage] = useState("");
+  const [isRecording, setIsRecording] = useState(false);
+
+  // Create a reference to SpeechRecognition
+  const SpeechRecognition =
+    window.SpeechRecognition || (window as any).webkitSpeechRecognition;
+  const recognition = SpeechRecognition ? new SpeechRecognition() : null;
+
+  if (recognition) {
+    recognition.lang = "en-US"; // Set the language
+    recognition.interimResults = true; // Show interim results
+    recognition.maxAlternatives = 1; // Only take the first recognized speech result
+  }
 
   const handleSendMessage = async () => {
     if (newMessage.trim() !== "" && user) {
@@ -55,6 +68,27 @@ const Home: React.FC = () => {
     }
   };
 
+  const handleStartRecording = () => {
+    if (recognition) {
+      recognition.start();
+      setIsRecording(true);
+
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setNewMessage(transcript);
+      };
+
+      recognition.onerror = (event: any) => {
+        console.error("Speech recognition error:", event.error);
+        setIsRecording(false);
+      };
+
+      recognition.onend = () => {
+        setIsRecording(false);
+      };
+    }
+  };
+
   return (
     <section className="bgland relative">
       <div className="container bgland mx-auto min-h-screen">
@@ -70,12 +104,12 @@ const Home: React.FC = () => {
 
         {/* Floating Robot Button */}
         <button
-          className="fixed bottom-18 right-24 bg-blue-600 text-white p-4 rounded-full flex flex-col items-center shadow-lg hover:bg-blue-700 transition"
+          className="fixed bottom-4 right-2 bg-blue-600 text-white p-4 rounded-full flex flex-col items-center shadow-lg hover:bg-blue-700 transition"
           onClick={() => setIsModalOpen(true)}
         >
           <BsRobot size={50} />
         </button>
-        <h1 className="fixed bottom-10 right-24  font-bold">Personal AI</h1>
+        
 
         {/* Modal for Chatbot */}
         {isModalOpen && (
@@ -114,20 +148,15 @@ const Home: React.FC = () => {
                       <div
                         key={index}
                         className={`flex ${
-                          msg.startsWith("You:")
-                            ? "justify-end"
-                            : "justify-start"
+                          msg.startsWith("You:") ? "justify-end" : "justify-start"
                         }`}
                       >
                         <div
                           className={`max-w-xs p-3 rounded-lg my-2 ${
-                            msg.startsWith("You:")
-                              ? "bg-blue-500 text-white"
-                              : "bg-gray-200 text-gray-700"
+                            msg.startsWith("You:") ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"
                           }`}
                         >
-                          <pre className="whitespace-pre-wrap">{msg}</pre>{" "}
-                          {/* Preserve spaces */}
+                          <pre className="whitespace-pre-wrap">{msg}</pre>
                         </div>
                       </div>
                     ))
@@ -150,6 +179,17 @@ const Home: React.FC = () => {
                     className="absolute right-2 md:right-20 lg:right-36 bg-[#6F9EF6] font-bold px-2 text-white py-1 rounded-full top-1/2 transform -translate-y-1/2"
                   >
                     Send
+                  </button>
+
+                  {/* Microphone Button for Voice Input */}
+                  <button
+                    onClick={handleStartRecording}
+                    className="absolute right-2 bottom-0 p-3 rounded-full bg-gray-200 hover:bg-gray-300 transition"
+                  >
+                    <FaMicrophone
+                      size={30}
+                      color={isRecording ? "#ff0000" : "#000"}
+                    />
                   </button>
                 </div>
               </div>

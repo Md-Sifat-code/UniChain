@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../Authentication/Context_auth/UserContext";
+import { IoArrowBackCircle } from "react-icons/io5";
 
 const API_BASE_URL = import.meta.env.VITE_api_url;
 
@@ -38,6 +39,7 @@ const Course: React.FC = () => {
 
   return (
     <section className="container mx-auto p-6">
+      <Link className="text-2xl text-blue-800" to={"/class"}><IoArrowBackCircle /></Link>
       <h1 className="text-4xl font-extrabold text-center mb-10 text-gray-800">
         Faculty Details
       </h1>
@@ -61,6 +63,7 @@ const Course: React.FC = () => {
             <p className="text-sm font-medium text-gray-700">Contact:</p>
             <p className="text-sm text-gray-600">📧 {faculty.email}</p>
             <p className="text-sm text-gray-600">📞 {faculty.phone}</p>
+            <div className="flex flex-row gap-6">
             {isAdmin && (
               <button
                 onClick={() => navigate(`/class/course/create/${id}`)} // Navigate to CourseCreate
@@ -69,6 +72,13 @@ const Course: React.FC = () => {
                 Add Course
               </button>
             )}
+            <button
+              onClick={() => navigate(`/mail/${id}`)} // Navigate to Emailme component
+              className="mt-4  bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+            >
+              Mail Me
+            </button>
+            </div>
           </div>
         </div>
       </div>

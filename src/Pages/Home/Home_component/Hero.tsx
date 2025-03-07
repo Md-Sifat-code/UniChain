@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
           </p>
           <Link
             className="px-12 py-3 bg-red-300 w-[200px] flex flex-row justify-center font-bold text-white mt-6 rounded-[10px] items-center"
-            to={""}
+            to={"/class"}
           >
             Get Started
           </Link>

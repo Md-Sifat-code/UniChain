@@ -126,7 +126,10 @@ const Navabr_Home: React.FC = () => {
                 >
                   Dashboard
                 </Link>
-
+                <Link className="px-4 py-2 hover:bg-gray-100 cursor-pointer" to={"/lostandfound"}>Lost&Found</Link>
+                <Link className="px-4 py-2 hover:bg-gray-100 cursor-pointer" to={"/updateandannounce"}>Update&Announce</Link>
+                <Link className="px-4 py-2 hover:bg-gray-100 cursor-pointer" to={"/location"}>Location</Link>
+                {/* <Link className="px-4 py-2 hover:bg-gray-100 cursor-pointer" to={"/vrexp"}>OpenVR</Link> */}
                 <button
                   onClick={handleLogout}
                   className="px-4 py-2 text-left hover:bg-red-500 hover:text-white cursor-pointer"

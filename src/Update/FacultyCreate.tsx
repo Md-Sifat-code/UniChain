@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { IoArrowBackCircle } from "react-icons/io5";
+import { Link, useNavigate } from "react-router-dom";
 
 const API_BASE_URL = import.meta.env.VITE_api_url;
 
@@ -61,6 +62,7 @@ const FacultyCreate: React.FC = () => {
 
   return (
     <section className="container mx-auto p-6">
+      <Link className="text-2xl text-blue-800" to={"/home"}><IoArrowBackCircle /></Link>
       <h1 className="text-4xl font-extrabold text-center mb-10 text-gray-800">
         Add Faculty
       </h1>

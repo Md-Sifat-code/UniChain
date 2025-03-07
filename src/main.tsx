@@ -41,6 +41,24 @@ import AddExam from "./Update/AddExam";
 import AddAssignment from "./Update/AddAssignment";
 import Bus_Home from "./Pages/BusRoute/Bus_Home";
 import BusLayout from "./Layout/BusLayout";
+import Bus_Details from "./Pages/BusRoute/Bus_Details";
+import Bus_Create from "./Update/Bus_Create";
+import Route_Create from "./Update/Route_Create";
+import AnnouncementCreate from "./Update/AnnouncementCreate";
+import Restaurant_Create from "./Update/Restaurant_Create";
+import Club_create from "./Update/Club_create";
+import Event_create from "./Update/Event_create";
+import Lostandfound from "./Pages/Lostandfound";
+import LostandFound_Layout from "./Layout/LostandFound_Layout";
+import Item_create from "./Update/Item_create";
+import UpdateandAnnounce from "./Pages/UpdateandAnnounce";
+
+import Announceandalert_Layout from "./Layout/Announceandalert_Layout";
+import Universityupdatecreate from "./Update/Universityupdatecreate";
+import AleartCreate from "./Update/AleartCreate";
+import Location from "./Pages/Location";
+import Vrexp from "./Pages/Vrexp";
+import Emailme from "./Pages/Emailme";
 
 const router: RouteObject[] = [
   {
@@ -98,6 +116,10 @@ const router: RouteObject[] = [
         path: "/canteen/update/:id",
         element: <Canteen_Update />,
       },
+      {
+        path: "/canteen/restaurantcreate/:userId",
+        element: <Restaurant_Create />,
+      },
     ],
   },
   {
@@ -116,6 +138,14 @@ const router: RouteObject[] = [
       {
         path: "/event/update/:id",
         element: <Club_update />,
+      },
+      {
+        path: "/event/clubcreate",
+        element: <Club_create />,
+      },
+      {
+        path: "/event/create/:clubId",
+        element: <Event_create />,
       },
     ],
   },
@@ -182,8 +212,72 @@ const router: RouteObject[] = [
         path: "/bus",
         element: <Bus_Home />,
       },
+      {
+        path: "/bus/:id",
+        element: <Bus_Details />,
+      },
+      {
+        path: "/bus/create",
+        element: <Bus_Create />,
+      },
+      {
+        path: "/bus/update/:id",
+        element: <Route_Create />,
+      },
+      {
+        path: "/bus/announcement/:id",
+        element: <AnnouncementCreate />,
+      },
     ],
   },
+  {
+    path:"/lostandfound",
+    element: <LostandFound_Layout/>,
+    errorElement: <ErrorElement/>,
+    children: [
+      {
+        path : "/lostandfound",
+        element : <Lostandfound/>
+      },
+      {
+        path : "/lostandfound/create",
+        element: <Item_create/>
+
+      }
+    ]
+
+  },
+  {
+    path: "/updateandannounce",
+    element : <Announceandalert_Layout/>,
+    errorElement: <ErrorElement/>,
+    children:[
+      {
+        path: "/updateandannounce",
+        element : <UpdateandAnnounce/>,
+      },
+      {
+        path : "/updateandannounce/create",
+        element: <Universityupdatecreate/>
+      },{
+        path: "/updateandannounce/alert/create",
+        element : <AleartCreate/>
+      }
+
+    ]
+  },{
+    path: "/location",
+    element : <Location/>,
+    errorElement : <ErrorElement/>
+  },
+  {
+    path : "/vrexp",
+    element : <Vrexp/>,
+    errorElement: <ErrorElement/>
+  },{
+    path : "/mail/:facultyId",
+    element : <Emailme/>
+  }
 ];
 
 const browserRouter = createBrowserRouter(router);

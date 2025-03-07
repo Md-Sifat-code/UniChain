@@ -36,14 +36,14 @@ const AdminDashboard: React.FC = () => {
 
   // Feature Cards Data
   const features = [
-    { title: "Bus Route Management", icon: <FaBus />, path: "/busroute" },
+    { title: "Bus Route Management", icon: <FaBus />, path: "/bus" },
     { title: "Canteen Management", icon: <FaUtensils />, path: "/canteen" },
     {
       title: "Exam Schedule Management",
       icon: <FaClipboardList />,
-      path: "/exam-schedule",
+      path: "/class",
     },
-    { title: "Event Management", icon: <FaCalendarAlt />, path: "/events" },
+    { title: "Event Management", icon: <FaCalendarAlt />, path: "/event" },
   ];
 
   return (

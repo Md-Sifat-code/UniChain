@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { IoArrowBackCircle } from "react-icons/io5";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const API_BASE_URL = import.meta.env.VITE_api_url;
 
@@ -42,6 +43,7 @@ const AddExam: React.FC = () => {
 
   return (
     <section className="container mx-auto p-6">
+      <Link className="text-2xl text-blue-800" to={"/class"}><IoArrowBackCircle /></Link>
       <h1 className="text-3xl font-bold mb-6">Add Exam Schedule</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
